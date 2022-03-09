@@ -15,6 +15,8 @@ from game.services.video_service import VideoService
 from game.shared.color import Color
 from game.shared.point import Point
 
+from game.casting.actor import Actor
+
 
 def main():
     
@@ -23,6 +25,34 @@ def main():
     cast.add_actor("foods", Food())
     cast.add_actor("snakes", Snake())
     cast.add_actor("scores", Score())
+    
+    # try adding a second snake
+    cast.add_actor("snake2", Snake())
+
+
+    # This sets an x and y for the position of snake2
+    x = int(3*(constants.MAX_X / 4))
+    y = int(constants.MAX_Y / 2)
+    # this is a different x position for snake1
+    x2 = int((constants.MAX_X / 4))
+
+    # set position and velocity of snake2
+    for i in range(constants.SNAKE_LENGTH):
+        position = Point(x, y + i * constants.CELL_SIZE)
+        velocity = Point(0, -1 * constants.CELL_SIZE)
+            
+        cast._actors["snake2"][0]._segments[i].set_position(position)
+        cast._actors["snake2"][0]._segments[i].set_velocity(velocity)
+
+    # I did this to change the position and velocity of snake1
+            
+        position = Point(x2, y + i * constants.CELL_SIZE)
+        velocity = Point(0, -1 * constants.CELL_SIZE)
+        cast._actors["snakes"][0]._segments[i].set_position(position)
+        cast._actors["snakes"][0]._segments[i].set_velocity(velocity)
+
+
+
    
     # start the game
     keyboard_service = KeyboardService()

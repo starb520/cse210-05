@@ -41,11 +41,14 @@ class HandleCollisionsAction(Action):
         snake = cast.get_first_actor("snakes")
         head = snake.get_head()
 
-        if head.get_position().equals(food.get_position()):
-            points = food.get_points()
-            snake.grow_tail(points)
-            score.add_points(points)
-            food.reset()
+
+        '''This code needs to be deleted eventually, it used to grow the snakes 
+           when they ate the food.'''
+        # if head.get_position().equals(food.get_position()):
+        #     points = food.get_points()
+        #     snake.grow_tail(points)
+        #     score.add_points(points)
+        #     food.reset()
     
     def _handle_segment_collision(self, cast):
         """Sets the game over flag if the snake collides with one of its segments.
@@ -70,6 +73,11 @@ class HandleCollisionsAction(Action):
         if self._is_game_over:
             snake = cast.get_first_actor("snakes")
             segments = snake.get_segments()
+
+            # I added the snake 2 so at game over so snake2 can turn white.
+            snake2 = cast.get_first_actor("snake2")
+            segment2 = snake2.get_segments()
+
             food = cast.get_first_actor("foods")
 
             x = int(constants.MAX_X / 2)
@@ -83,4 +91,8 @@ class HandleCollisionsAction(Action):
 
             for segment in segments:
                 segment.set_color(constants.WHITE)
-            food.set_color(constants.WHITE)
+
+            # I added this so snake 2 can turn white at game over.
+            for segment in segment2:
+                segment.set_color(constants.WHITE)
+            

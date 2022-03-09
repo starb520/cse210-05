@@ -17,6 +17,10 @@ class Snake(Actor):
         self._segments = []
         self._prepare_body()
 
+        # I added this num_movements attribute to help with
+        # growing the snakes after a certain number of movements.
+        self._num_movements = 0
+
     def get_segments(self):
         return self._segments
 
@@ -30,6 +34,19 @@ class Snake(Actor):
             previous = self._segments[i - 1]
             velocity = previous.get_velocity()
             trailing.set_velocity(velocity)
+
+        # Update num_movements and grow snake
+        self._num_movements += 1
+        if self._num_movements == 35:
+            self.grow_tail(2)
+
+            # This gets the color of the snake to update it on the last tail segment.
+            color = self._segments[0]._color
+            self._segments[len(self._segments) - 1].set_color(color)
+            self._segments[len(self._segments) - 2].set_color(color)
+
+            # reset num_movements to grow the snake later.
+            self._num_movements = 0
 
     def get_head(self):
         return self._segments[0]

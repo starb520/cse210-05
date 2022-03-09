@@ -22,13 +22,11 @@ def main():
     
     # create the cast
     cast = Cast()
-    cast.add_actor("foods", Food())
     cast.add_actor("snakes", Snake())
     cast.add_actor("scores", Score())
     
     # try adding a second snake
     cast.add_actor("snake2", Snake())
-
 
     # This sets an x and y for the position of snake2
     x = int(3*(constants.MAX_X / 4))
@@ -51,7 +49,9 @@ def main():
         cast._actors["snakes"][0]._segments[i].set_position(position)
         cast._actors["snakes"][0]._segments[i].set_velocity(velocity)
 
-
+    # This sets the colors of the two snakes.
+        cast._actors["snake2"][0]._segments[i].set_color(constants.GREEN)
+        cast._actors["snakes"][0]._segments[i].set_color(constants.RED)
 
    
     # start the game

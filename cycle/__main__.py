@@ -23,10 +23,11 @@ def main():
     # create the cast
     cast = Cast()
     cast.add_actor("snakes", Snake())
-    cast.add_actor("scores", Score())
     
+    cast.add_actor("scores", Score())
     # try adding a second snake
     cast.add_actor("snake2", Snake())
+    
 
     # This sets an x and y for the position of snake2
     x = int(3*(constants.MAX_X / 4))

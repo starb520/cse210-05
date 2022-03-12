@@ -89,7 +89,7 @@ class HandleCollisionsAction(Action):
             # less than 20 pixels, game over is true and snake1 gets points.
             if abs(delta.get_x()) < 17 and abs(delta.get_y()) < 17:
                 self._is_game_over = True
-                scores[0].add_points(10)
+                scores[0].add_points(5)
         
     def _handle_game_over(self, cast):
         """Shows the 'game over' message and turns the snake and food white if the game is over.

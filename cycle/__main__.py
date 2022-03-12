@@ -79,8 +79,16 @@ def main():
 
         # See if users would like to continue playing.
         continue_play = input("Would you like to play again? [y/n]")
-        play_again = continue_play.lower() == "y"
+        play_again = continue_play.lower()
+        if continue_play.lower() == "n":
+            scores = cast.get_actors("scores")
 
+            scores[0].reset_points()
+            scores[1].reset_points()
+            play_again = False
+        elif continue_play.lower() == "y":
+            play_again = True
+        
 
 if __name__ == "__main__":
     main()

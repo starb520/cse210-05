@@ -75,7 +75,7 @@ class HandleCollisionsAction(Action):
 
             # If the distance between the head of snake one and the segment of snake2 body is
             # less than 20 pixels, game over is true and snake 2 gets points.
-            if abs(delta.get_x()) < 20 and abs(delta.get_y()) < 20:
+            if abs(delta.get_x()) < 17 and abs(delta.get_y()) < 17:
                 self._is_game_over = True
                 # Add points to snake2.
                 scores[1].add_points(10)
@@ -87,7 +87,7 @@ class HandleCollisionsAction(Action):
             delta = head2.get_position().subtract(segment.get_position())
             # If the distance between the head of snake2 and the segment of snake1 body is
             # less than 20 pixels, game over is true and snake1 gets points.
-            if abs(delta.get_x()) < 20 and abs(delta.get_y()) < 20:
+            if abs(delta.get_x()) < 17 and abs(delta.get_y()) < 17:
                 self._is_game_over = True
                 scores[0].add_points(10)
         

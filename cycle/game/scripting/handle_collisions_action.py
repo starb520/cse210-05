@@ -59,10 +59,37 @@ class HandleCollisionsAction(Action):
         snake = cast.get_first_actor("snakes")
         head = snake.get_segments()[0]
         segments = snake.get_segments()[1:]
+
+        snake2 = cast.get_first_actor("snake2")
+        head2 = snake2.get_segments()[0]
+        segments2 = snake2.get_segments()[1:]
+
+        # Get a scores list.
+        scores = cast.get_actors("scores")
         
-        for segment in segments:
-            if head.get_position().equals(segment.get_position()):
+        # Loop through the segments in the snake2 body. 
+        for segment in segments2:
+            # Calculate the distance between the head of snake one and the body
+            # segment of snake 2.
+            delta= head.get_position().subtract(segment.get_position())
+
+            # If the distance between the head of snake one and the segment of snake2 body is
+            # less than 20 pixels, game over is true and snake 2 gets points.
+            if abs(delta.get_x()) < 20 and abs(delta.get_y()) < 20:
                 self._is_game_over = True
+                # Add points to snake2.
+                scores[1].add_points(10)
+
+        # Loop through the segments in the snake1 body.
+        for segment in segments:
+            # Calculate the distance between the head of snake2 and the snake two
+            # body.
+            delta = head2.get_position().subtract(segment.get_position())
+            # If the distance between the head of snake2 and the segment of snake1 body is
+            # less than 20 pixels, game over is true and snake1 gets points.
+            if abs(delta.get_x()) < 20 and abs(delta.get_y()) < 20:
+                self._is_game_over = True
+                scores[0].add_points(10)
         
     def _handle_game_over(self, cast):
         """Shows the 'game over' message and turns the snake and food white if the game is over.
